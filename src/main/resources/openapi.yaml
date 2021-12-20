@@ -1,0 +1,60 @@
+openapi: 3.0.1
+info:
+  title: Chatty API specs
+  version: 1.0.0
+servers:
+  - url: http://{hostname}:{port}/chatty
+    variables:
+      hostname:
+        description: Host where app is running
+        default: localhost
+      port:
+        enum:
+          - '8080'
+        default: '8080'
+paths:
+  /conversation:
+    post:
+      summary: Receives a message to have a conversation with Chatty
+      operationId: answerQuestion
+      requestBody:
+        description: A conversation message to get an answer to
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConversationDto'
+      responses:
+        '200':
+          description: Answer from Chatty
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnswerDto"
+  /questions:
+    get:
+      summary: Returns list of supported questions by chatty
+      operationId: getAll
+      responses:
+        '200':
+          description: List of supported questions by chatty
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuestionListDto"
+components:
+  schemas:
+    QuestionListDto:
+      properties:
+        questions:
+          type: array
+          items:
+            type: string
+    AnswerDto:
+      properties:
+        answer:
+          type: string
+    ConversationDto:
+      properties:
+        message:
+          type: string

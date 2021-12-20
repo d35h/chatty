@@ -1,0 +1,28 @@
+application:
+  base-currency: EUR
+  base-exchange-url: https://api.frankfurter.app/
+  base-jokes-url: https://api.chucknorris.io/
+  conversation:
+    questions:
+      rates:
+        - Convert <amount> <from> to <to>
+        - How much is <amount> <from> in <to>
+      jokes:
+        - Can you tell me a joke?
+        - Tell me a joke
+      greetings:
+        - Hello
+    placeholder-to-regex:
+      "[<amount>]": "(\\d+\\.?\\d*)"
+      "[<from>]": "([a-zA-Z]{3})"
+      "[<to>]": "([a-zA-Z]{3})"
+
+server:
+  error:
+    include-message: always
+
+#application:
+#  placeholder-to-regex:
+#    amount: \\d{3}jskadjal
+#  question:
+#    - QUestion <amount> bla bla
